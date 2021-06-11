@@ -1,0 +1,10 @@
+TroubleShooting 문서
+
+1. 마우스를 움직여야만 프로그램이 돌아가는 현상 해결
+- matplotlibrc 파일(~/.config/matplotlib/)의 backend를 GTK계열에서 Qt5Agg로 바꿔서 해결 --> 중요.
+- 관련 사이트: https://stackoverflow.com/questions/49956533/matplotlib-plot-with-key-handler-only-updates-when-mouse-moves
+
+2. Planning이 막히면 쉬운 문제부터 하나씩 해결되는지 보기
+
+3. state 260이 4로 대입되는 현상 발생
+ --> np.array에서 dtype uint8로 지정해서 생긴 overflow 문제... uint16으로 바꿔줘서 해결하였음.

@@ -1,0 +1,6 @@
+#actionExecution service
+int32 action_id
+string name
+diagnostic_msgs/KeyValue[] parameters
+---
+bool success

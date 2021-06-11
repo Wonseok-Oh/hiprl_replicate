@@ -1,0 +1,10 @@
+functions:
+   - $(find rosplan_demos)/common/hiprl_sensing.py
+
+topics:
+   at_location:
+      params:
+         - robot
+         - '*'
+      topic: /pose
+      msg_type: geometry_msgs/PoseStamped

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>hiprl_replicate</name>
+  <version>1.0.0</version>
+  <description>The hiprl_replicate package</description>
+
+  <maintainer email="ooww0123@kaist.ac.kr">Wonseok Oh</maintainer>
+  <license>BSD</license>
+  <author email="ooww0123@kaist.ac.kr">Wonseok Oh</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>rosplan_planning_system</build_depend>
+  
+  <build_export_depend>nav_msgs</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
+</package>
