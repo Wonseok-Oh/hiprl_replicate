@@ -4,7 +4,8 @@
 
 int main(int argc, char **argv){
 	ros::init(argc, argv, "update_knowledge_client");
-	knowledge_updater::KnowledgeUpdater knowledge_updater;
+	std::string process_num = std::string(argv[1]);
+	knowledge_updater::KnowledgeUpdater knowledge_updater(process_num);
 	ros::spin();
 	return 0;
 }

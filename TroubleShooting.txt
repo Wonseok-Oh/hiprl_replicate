@@ -8,3 +8,32 @@ TroubleShooting 문서
 
 3. state 260이 4로 대입되는 현상 발생
  --> np.array에서 dtype uint8로 지정해서 생긴 overflow 문제... uint16으로 바꿔줘서 해결하였음.
+
+---
+4. learning with num_env = 1 
+| approxkl           | 0.0035353159  |
+| clipfrac           | 0.037109375   |
+| explained_variance | 0.0889        |
+| fps                | 1             |
+| n_updates          | 194           |
+| policy_entropy     | 0.09803599    |
+| policy_loss        | -0.0029136282 |
+| serial_timesteps   | 24832         |
+| time_elapsed       | 1.98e+04      |
+| total_timesteps    | 24832         |
+| value_loss         | 0.0950769 
+
+learning with num_env = 4
+--------------------------------------
+| approxkl           | 0.003039244   |
+| clipfrac           | 0.0390625     |
+| explained_variance | 0.0356        |
+| fps                | 0             |
+| n_updates          | 48            |
+| policy_entropy     | 0.51700807    |
+| policy_loss        | -0.0009806026 |
+| serial_timesteps   | 6144          |
+| time_elapsed       | 1.96e+04      |
+| total_timesteps    | 24576         |
+| value_loss         | 0.07829185    |
+--------------------------------------

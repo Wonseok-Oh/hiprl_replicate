@@ -3,7 +3,7 @@
 using namespace knowledge_updater;
 using namespace std;
 
-KnowledgeUpdater::KnowledgeUpdater(): m_prev_pos_x(0), m_prev_pos_y(0), m_resolution (3), m_grid_size(10),
+KnowledgeUpdater::KnowledgeUpdater(std::string process_num): m_prev_pos_x(0), m_prev_pos_y(0), m_resolution (3), m_grid_size(10),
 		m_search_mode(true), m_keep_mode(false), m_bring_mode(false){
 	m_private_nh = ros::NodeHandle("~");
 	m_nh = ros::NodeHandle();
@@ -18,18 +18,20 @@ KnowledgeUpdater::KnowledgeUpdater(): m_prev_pos_x(0), m_prev_pos_y(0), m_resolu
 	ss.str("");
 	ss << "/" << m_kb << "/state/instances";
 	m_instance_client = m_nh.serviceClient<rosplan_knowledge_msgs::GetInstanceService>(ss.str());
-	m_obs_sub = m_nh.subscribe<hiprl_replicate::Obs>("observation", 1, &KnowledgeUpdater::observationCallback, this);
-	m_goal_sub = m_nh.subscribe<geometry_msgs::PoseStamped>("goal_pose", 1, &KnowledgeUpdater::goalCallback, this);
-	m_pose_sub = m_nh.subscribe<geometry_msgs::PoseStamped>("pose", 1, &KnowledgeUpdater::poseCallback, this);
+	m_obs_sub = m_nh.subscribe<hiprl_replicate::Obs>("observation" + process_num, 1000, &KnowledgeUpdater::observationCallback, this);
+	m_goal_sub = m_nh.subscribe<geometry_msgs::PoseStamped>("goal_pose" + process_num, 1, &KnowledgeUpdater::goalCallback, this);
+	m_pose_sub = m_nh.subscribe<geometry_msgs::PoseStamped>("pose" + process_num, 1, &KnowledgeUpdater::poseCallback, this);
 	ss.str("");
 	ss << "/" << m_kb << "/reset";
 	m_reset_sub = m_nh.subscribe<rosplan_knowledge_msgs::processReset>(ss.str(), 1, &KnowledgeUpdater::resetCallback, this);
-	m_client = m_nh.serviceClient<rosplan_knowledge_msgs::KnowledgeUpdateServiceArray>("/rosplan_knowledge_base/update_array");
+	ss.str("");
+	ss << "/" << m_kb << "/update_array";
+	m_client = m_nh.serviceClient<rosplan_knowledge_msgs::KnowledgeUpdateServiceArray>(ss.str());
 	m_seen_box_id_list = std::vector<int>();
 	m_checked_box_id_list = std::vector<int>();
 	m_seen_obj_id_list = std::vector<int>();
-	m_precondition_checker = m_nh.advertiseService("check_precondition", &KnowledgeUpdater::check_precondition, this);
-	m_action_effect_processor = m_nh.advertiseService("process_action_effect", &KnowledgeUpdater::process_action_effect, this);
+	m_precondition_checker = m_nh.advertiseService("check_precondition" + process_num, &KnowledgeUpdater::check_precondition, this);
+	m_action_effect_processor = m_nh.advertiseService("process_action_effect" + process_num, &KnowledgeUpdater::process_action_effect, this);
 }
 
 KnowledgeUpdater::~KnowledgeUpdater(){}

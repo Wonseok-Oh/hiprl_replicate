@@ -41,7 +41,7 @@ enum class Update_type {
 
 class KnowledgeUpdater {
 public:
-	KnowledgeUpdater();
+	KnowledgeUpdater(std::string process_num);
 	~KnowledgeUpdater();
 	void observationCallback(const hiprl_replicate::Obs::ConstPtr& msg);
 	void poseCallback(const geometry_msgs::PoseStampedConstPtr& msg);
