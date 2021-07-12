@@ -1,2 +1,6 @@
 # ignore all files in any directory named Visualization
 Visualization/
+
+# ignore auto-generated pddl file
+pddl/problem*
+pddl/plan*
