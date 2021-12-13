@@ -4,7 +4,6 @@ uint32[] object_pos_list
 uint32[] object_state_list
 uint32 agent_dir
 
-
 # type id
 uint32 EMPTY = 1
 uint32 WALL = 2

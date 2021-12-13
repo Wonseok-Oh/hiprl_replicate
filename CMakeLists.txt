@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
    FILES
    Obs.msg
+   Obs_multi.msg
 )
 
 add_service_files(
@@ -51,6 +52,34 @@ add_dependencies(knowledge_update_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${cat
 target_link_libraries(knowledge_update_node knowledge_updater
    ${catkin_LIBRARIES}
 )
+
+add_library(knowledge_updater_multi
+   src/knowledge_updater_multi.cpp
+)
+add_dependencies(knowledge_updater_multi ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(knowledge_updater_multi ${Boost_LIBRARIES} ${catkin_LIBRARIES})
+
+
+add_executable(knowledge_update_multi_node src/knowledge_update_multi_node.cpp)
+add_dependencies(knowledge_update_multi_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(knowledge_update_multi_node knowledge_updater_multi
+   ${catkin_LIBRARIES}
+)
+
+add_library(knowledge_updater_multi_individual
+   src/knowledge_updater_multi_individual.cpp
+)
+add_dependencies(knowledge_updater_multi_individual ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(knowledge_updater_multi_individual ${Boost_LIBRARIES} ${catkin_LIBRARIES})
+
+
+add_executable(knowledge_update_multi_individual_node src/knowledge_update_multi_individual_node.cpp)
+add_dependencies(knowledge_update_multi_individual_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(knowledge_update_multi_individual_node knowledge_updater_multi_individual
+   ${catkin_LIBRARIES}
+)
+
+
 
 add_library(hiprl_action_interface
    src/hiprl_action_interface.cpp
